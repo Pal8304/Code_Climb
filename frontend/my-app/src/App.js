@@ -13,7 +13,7 @@ function App() {
         onSubmit={async (e) => {
           e.preventDefault();
           const response = await fetch(
-            `http://localhost:8000/get_unsolved_questions/${username}/1000/1100`
+            `http://localhost:8000/get_questions/${username}`
           );
           const data = await response.json();
           setProblems(data);
@@ -28,7 +28,25 @@ function App() {
         <button type="submit">Submit</button>
       </form>
 
-      {JSON.stringify(problems)}
+      {
+        problems.length > 0 && (
+          <div>
+            <h2>
+              Problems
+            </h2>
+            <ul>
+              {problems.map((problem)=>
+                <li>
+                  <a href= {`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`} >
+                    {problem.name} ({problem.rating})
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )
+      }
+      {/* {JSON.stringify(problems)} */}
     </main>
   );
 }

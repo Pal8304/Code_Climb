@@ -86,14 +86,14 @@ async def get_questions(handle: str):
                     )
                 data = await response.json()
                 rating = data["result"][0]["rating"]
-                lowerlimit = str((rating // 100) * 100 - 200)
-                upperlimit = str((rating // 100) * 100 + 200)
+                lowerlimit = (rating // 100) * 100 - 200
+                upperlimit = (rating // 100) * 100 + 200
                 print(lowerlimit, upperlimit)
                 async with session.get(
                     "https://acodedaily.com/api/v2/ladder?startRating="
-                    + lowerlimit
+                    + str(lowerlimit)
                     + "&endRating="
-                    + upperlimit
+                    + str(upperlimit)
                 ) as response:
                     if response.status != 200:
                         return HTTPException(
@@ -118,8 +118,12 @@ async def get_questions(handle: str):
                         )
                         unsolved_questions = []
                         for question in questions_list["data"]:
-                            if question["name"] not in solved_questions:
-                                unsolved_questions.append(question["name"])
+                            if (
+                                question["name"] not in solved_questions
+                                and question["rating"] == lowerlimit
+                            ):
+                                unsolved_questions.append(question)
+                                lowerlimit += 100
                         return unsolved_questions
         except Exception as e:
             return {"Error": "Please try again later" + str(e)}
