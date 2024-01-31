@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function App() {
   const [username, setUsername] = useState("");
-  const [problems, setProblems] = useState([]);
+  const [problems, setProblems] = useState(null);
 
   return (
     <main>
@@ -24,6 +24,7 @@ function App() {
           onChange={(e) => {
             setUsername(e.target.value);
           }}
+          placeholder="Enter your CF username"
         />
         <button type="submit">Submit</button>
       </form>
