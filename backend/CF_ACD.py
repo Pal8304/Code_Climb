@@ -134,13 +134,69 @@ async def get_questions_by_tag(handle: str, tag: str):
     async with aiohttp.ClientSession() as session:
         try:
             async with session.get(
-                "https://codeforces.com/api/problemset.problems?tags=" + tag
+                "https://codeforces.com/api/user.info?handles=" + handle
             ) as response:
                 if response.status != 200:
                     return HTTPException(
                         status_code=response.status, detail="CF API is down"
                     )
                 data = await response.json()
-                return data["result"]["problems"]
+                rating = data["result"][0]["rating"]
+                lowerlimit = (rating // 100) * 100 - 200
+                upperlimit = (rating // 100) * 100 + 200
+                async with session.get(
+                    "https://codeforces.com/api/problemset.problems?tags=" + tag
+                ) as response:
+                    if response.status != 200:
+                        return HTTPException(
+                            status_code=response.status, detail="CF API is down"
+                        )
+                    data = await response.json()
+                    questions_list = data["result"]["problems"]
+                    # print(questions_list)
+                    # return questions_list
+                    async with session.get(
+                        "https://codeforces.com/api/user.status?handle=" + handle
+                    ) as response:
+                        if response.status != 200:
+                            return HTTPException(
+                                status_code=response.status, detail="CF API is down"
+                            )
+                        data = await response.json()
+                        # return data
+                        data_with_verdict = []
+                        for question in questions_list:
+                            if (
+                                "rating" in question
+                                and question["rating"] >= lowerlimit
+                                and question["rating"] <= upperlimit
+                            ):
+                                if question["name"] in list(
+                                    set(
+                                        item["problem"]["name"]
+                                        for item in data["result"]
+                                        if item["verdict"] == "OK"
+                                    )
+                                ):
+                                    data_with_verdict.append(
+                                        {
+                                            "name": question["name"],
+                                            "rating": question["rating"],
+                                            "solved": True,
+                                            "contestId": question["contestId"],
+                                            "index": question["index"],
+                                        }
+                                    )
+                                else:
+                                    data_with_verdict.append(
+                                        {
+                                            "name": question["name"],
+                                            "rating": question["rating"],
+                                            "solved": False,
+                                            "contestId": question["contestId"],
+                                            "index": question["index"],
+                                        }
+                                    )
+                        return data_with_verdict
         except Exception as e:
             return {"Error": "Please try again later" + str(e)}

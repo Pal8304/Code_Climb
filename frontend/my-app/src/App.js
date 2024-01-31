@@ -10,7 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [username, setUsername] = useState("");
   const [problems_rating, setProblems_Rating] = useState(null);
-  const [problem_tag, setProblem_Tag] = useState(null);
+  const [problems_tag, setProblem_Tag] = useState([]);
+  const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner, 1 - loading and spinner, 2 - fetched and no spinner
   return (
     <main>
@@ -45,17 +46,34 @@ function App() {
         onSubmit={async (e) => {
           e.preventDefault();
           const response = await fetch(
-            `http://localhost:8000/get_questions/${username}/${problem_tag}`
+            `http://localhost:8000/get_questions_by_tag/${username}/${tag}`
           );
+          const data = await response.json();
+          setProblem_Tag(data);
         }}
       >
+        {/* <input type="text" 
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+        placeholder="Enter your CF username" className="custom-input" /> */}
         <Dropdown className="custom-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Select Tag
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item>Binary Search</Dropdown.Item>
-            <Dropdown.Item>Ternary Search</Dropdown.Item>
+          <Dropdown.Item onClick={(e) => {
+            setTag("dp");
+          }
+          }>DP</Dropdown.Item>
+          <Dropdown.Item onClick={(e) => {
+            setTag("math");
+          }
+          }>Math</Dropdown.Item>
+          <Dropdown.Item onClick={(e) => {
+            setTag("implementation");
+          }
+          }>Implementation</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Button variant="primary" type="submit" className="custom-button">
@@ -83,7 +101,7 @@ function App() {
                   <a
                     href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
                   >
-                    {problem.name}
+                    {problem.name} ({problem.rating})
                   </a>
                 </li>
               ))}
@@ -93,6 +111,28 @@ function App() {
           <div></div>
         )
       }
+
+      {
+        problems_tag.length > 0 ? (
+          <div>
+            <h2>Problems</h2>
+            <ul>
+              {problems_tag.map((problem) => (
+                <li key={problem.contestId + problem.index}>
+                  <a
+                    href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
+                  >
+                    {problem.name} ({problem.rating})
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <div></div>
+        )
+      }
+      {/* {JSON.stringify(problems_tag)} */}
     </main>
   );
 }
