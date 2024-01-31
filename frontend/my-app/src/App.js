@@ -1,10 +1,17 @@
 import "./App.css";
 import { useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
+import Spinner from "react-bootstrap/Spinner";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 function App() {
   const [username, setUsername] = useState("");
-  const [problems, setProblems] = useState(null);
-
+  const [problems_rating, setProblems_Rating] = useState(null);
+  const [problem_tag, setProblem_Tag] = useState(null);
+  const [loading, setIsLoading] = useState(0);
   return (
     <main>
       <h1>CF Problem Generator</h1>
@@ -15,8 +22,10 @@ function App() {
           const response = await fetch(
             `http://localhost:8000/get_questions/${username}`
           );
+          setIsLoading(2);
           const data = await response.json();
-          setProblems(data);
+          setProblems_Rating(data);
+          setIsLoading(1);
         }}
       >
         <input
@@ -25,29 +34,72 @@ function App() {
             setUsername(e.target.value);
           }}
           placeholder="Enter your CF username"
+          className="custom-input"
         />
-        <button type="submit">Submit</button>
+        <Button variant="primary" type="submit" className="custom-button">
+          Generate Questions as per rating
+        </Button>
       </form>
 
-      {
-        problems.length > 0 && (
-          <div>
-            <h2>
-              Problems
-            </h2>
-            <ul>
-              {problems.map((problem)=>
-                <li>
-                  <a href= {`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`} >
-                    {problem.name} ({problem.rating})
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          const response = await fetch(
+            `http://localhost:8000/get_questions/${username}/${problem_tag}`
+          );
+        }}
+      >
+        <Dropdown className="custom-dropdown">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Select Tag
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item>Binary Search</Dropdown.Item>
+            <Dropdown.Item>Ternary Search</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Button variant="primary" type="submit" className="custom-button">
+          Generate Questions as per tag
+        </Button>
+      </form>
+
+      {loading==1 ? (
+        problems_rating != null ? (
+          problems_rating.length > 0 ? (
+            <div>
+              <h2>Problems</h2>
+              <ul>
+                {problems_rating.map((problem) => (
+                  <li>
+                    <a
+                      href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
+                      target="_blank"
+                    >
+                      {problem.name} ({problem.rating})
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div>
+              <h2>All Problems Solved</h2>
+            </div>
+          )
+        ) : (
+          <div>{/* <h2>No Problems</h2> */}</div>
         )
-      }
-      {/* {JSON.stringify(problems)} */}
+      ) : (
+        loading==2 ? (
+          <div>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <div></div>
+        )
+      )}
     </main>
   );
 }
