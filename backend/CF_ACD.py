@@ -127,3 +127,20 @@ async def get_questions(handle: str):
                         return unsolved_questions
         except Exception as e:
             return {"Error": "Please try again later" + str(e)}
+
+
+@app.get("/get_questions_by_tag/{handle}/{tag}")
+async def get_questions_by_tag(handle: str, tag: str):
+    async with aiohttp.ClientSession() as session:
+        try:
+            async with session.get(
+                "https://codeforces.com/api/problemset.problems?tags=" + tag
+            ) as response:
+                if response.status != 200:
+                    return HTTPException(
+                        status_code=response.status, detail="CF API is down"
+                    )
+                data = await response.json()
+                return data["result"]["problems"]
+        except Exception as e:
+            return {"Error": "Please try again later" + str(e)}
