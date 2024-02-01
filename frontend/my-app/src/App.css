@@ -1,5 +1,5 @@
 .custom-input {
-    width: 100%;
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -15,3 +15,74 @@
     outline: none;
 }
 
+.rating_input {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 10px;
+}
+
+.rating_input button{
+    width: auto;
+    padding: 10px 20px;
+    height: 50%;
+}
+
+.tag_input{
+    display: flex;
+    gap: 10px;
+}
+
+.problems{
+    display: flex;
+    gap: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.problems .problems_rating{
+    
+}
+
+.solved{
+    background-color: green;
+    color: #000;
+    text-decoration: none;
+}
+
+.solved:hover{
+    background-color: darkgreen;
+    color: #fff;
+}
+
+.unsolved{
+    background-color: red;
+    color: #000;
+    text-decoration: none;
+}
+
+ul {
+    width: 100%;
+}
+
+ul li {
+    display: flex;
+    list-style-type: none;
+    width: 20rem;
+    height: 3rem;
+    padding: 10px;
+    border-radius: 40px;
+    margin-top: 10px;
+    overflow-x: scroll;
+}
+
+ul a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.unsolved:hover{
+    background-color: darkred;
+    color: #fff;
+}

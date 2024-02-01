@@ -165,19 +165,22 @@ async def get_questions_by_tag(handle: str, tag: str):
                         data = await response.json()
                         # return data
                         data_with_verdict = []
+                        solved_questions = list(
+                            set(
+                                item["problem"]["name"]
+                                for item in data["result"]
+                                if item["verdict"] == "OK"
+                            )
+                        )
                         for question in questions_list:
+                            # if data_with_verdict.length > 5:
+                            #     break
                             if (
                                 "rating" in question
                                 and question["rating"] >= lowerlimit
                                 and question["rating"] <= upperlimit
                             ):
-                                if question["name"] in list(
-                                    set(
-                                        item["problem"]["name"]
-                                        for item in data["result"]
-                                        if item["verdict"] == "OK"
-                                    )
-                                ):
+                                if question["name"] in solved_questions:
                                     data_with_verdict.append(
                                         {
                                             "name": question["name"],
