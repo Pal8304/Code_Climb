@@ -41,8 +41,9 @@
     /* align-items: center; */
 }
 
-.problems .problems_rating{
-    
+.problems_tag_list{
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 .solved{

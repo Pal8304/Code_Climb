@@ -11,7 +11,7 @@ function App() {
   const [problems_tag, setProblem_Tag] = useState([]);
   const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
-  const [loading_tag,setIsLoading_tag] = useState(3);// 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
+  const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
   return (
     <main>
       <h1>CF Problem Generator</h1>
@@ -104,16 +104,16 @@ function App() {
             <ul>
               {problems_rating.map((problem) => (
                 <a
-                href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
-                target="_blank"
-              >
-                <li
-                  className={problem.solved ? "solved" : "unsolved"}
-                  key={problem.contestId + problem.index}
+                  href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
+                  target="_blank"
                 >
-                  {problem.name} ({problem.rating})
-                </li>
-              </a>
+                  <li
+                    className={problem.solved ? "solved" : "unsolved"}
+                    key={problem.contestId + problem.index}
+                  >
+                    {problem.name} ({problem.rating})
+                  </li>
+                </a>
               ))}
             </ul>
           </div>
@@ -130,21 +130,23 @@ function App() {
         ) : loading_tag == 5 ? (
           <div className="problems_tag">
             <h2>Problems By Tag</h2>
-            <ul>
-              {problems_tag.map((problem) => (
-                <a
-                  href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
-                  target="_blank"
-                >
-                  <li
-                    className={problem.solved ? "solved" : "unsolved"}
-                    key={problem.contestId + problem.index}
+            <div className="problems_tag_list">
+              <ul>
+                {problems_tag.map((problem) => (
+                  <a
+                    href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
+                    target="_blank"
                   >
-                    {problem.name} ({problem.rating})
-                  </li>
-                </a>
-              ))}
-            </ul>
+                    <li
+                      className={problem.solved ? "solved" : "unsolved"}
+                      key={problem.contestId + problem.index}
+                    >
+                      {problem.name} ({problem.rating})
+                    </li>
+                  </a>
+                ))}
+              </ul>
+            </div>
           </div>
         ) : (
           <div></div>
