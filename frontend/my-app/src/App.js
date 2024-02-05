@@ -82,6 +82,97 @@ function App() {
               >
                 Implementation
               </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("greedy");
+                }}
+              >
+                Greedy
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("brute force");
+                }}
+              >
+                Brute Force
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("constructive algorithms");
+                }}
+              >
+                Constructive Algorithms
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("dfs and similar");
+                }}
+              >
+                DFS and Similar
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("sortings");
+                }}
+              >
+                Sortings
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("binary search");
+                }}
+              >
+                Binary Search
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("graphs");
+                }}
+              >
+                Graphs
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("strings");
+                }}
+              >
+                Strings
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("number theory");
+                }}
+              >
+                Number Theory
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("combinatorics");
+                }}
+              >
+                Combinatorics
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("two pointers");
+                }}
+              >
+                Two Pointers
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("geometry");
+                }}
+              >
+                Geometry
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={(e) => {
+                  setTag("bitmasks");
+                }}
+              >
+                Bitmasks
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Button variant="primary" type="submit" className="custom-button">
@@ -118,7 +209,7 @@ function App() {
             </ul>
           </div>
         ) : (
-          <div></div>
+          <div className="problems"></div>
         )}
 
         {loading_tag == 4 ? (
@@ -149,7 +240,7 @@ function App() {
             </div>
           </div>
         ) : (
-          <div></div>
+          <div className="problems_tag"></div>
         )}
         {/* {JSON.stringify(problems_tag)} */}
       </div>

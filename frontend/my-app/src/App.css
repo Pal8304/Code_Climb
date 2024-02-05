@@ -1,3 +1,14 @@
+main{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 20px;
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+}
+
 .custom-input {
     width: 50%;
     padding: 12px 20px;
@@ -13,6 +24,10 @@
 .custom-input:focus {
     border-color: #4CAF50;
     outline: none;
+}
+
+.custom-button{
+    width: 50%;
 }
 
 .rating_input {
@@ -38,6 +53,8 @@
     gap: 100px;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #333;
+    color: #fff;
     /* align-items: center; */
 }
 
