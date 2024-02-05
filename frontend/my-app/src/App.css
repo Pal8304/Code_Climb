@@ -10,7 +10,6 @@ main{
 }
 
 .custom-input {
-    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -26,15 +25,12 @@ main{
     outline: none;
 }
 
-.custom-button{
-    width: 50%;
-}
-
 .rating_input {
     display: flex;
     align-items: center;
     /* justify-content: center; */
     gap: 10px;
+
 }
 
 .rating_input button{
@@ -58,9 +54,58 @@ main{
     /* align-items: center; */
 }
 
+.problems_rating{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.problems_rating h2{
+    justify-content: center;
+    align-items: center;
+}
+
+.problems_rating ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.problems_rating li{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.problems_tag{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
 .problems_tag_list{
-    max-height: 500px;
+    max-height: 50vh;
     overflow-y: scroll;
+}
+
+.problems_tag_list ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.problems_tag_list li{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .solved{
