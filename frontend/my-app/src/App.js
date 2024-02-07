@@ -4,6 +4,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ScrapeProblem from "./components/scrape_problem";
+
 
 function App() {
   const [username, setUsername] = useState("");
@@ -12,6 +14,7 @@ function App() {
   const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
+  const [currentProblem, setCurrentProblem] = useState(null);
   return (
     <main>
       <h1>CF Problem Generator</h1>
@@ -195,6 +198,11 @@ function App() {
             <ul>
               {problems_rating.map((problem) => (
                 <a
+                  onClick={
+                    () => {
+                      setCurrentProblem({contestId: problem.contestId, index: problem.index});
+                    }
+                  }
                   href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
                   target="_blank"
                 >
@@ -225,6 +233,11 @@ function App() {
               <ul>
                 {problems_tag.map((problem) => (
                   <a
+                    onClick={
+                      () => {
+                        setCurrentProblem({contestId: problem.contestId, index: problem.index});
+                      }
+                    }
                     href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
                     target="_blank"
                   >
@@ -244,6 +257,12 @@ function App() {
         )}
         {/* {JSON.stringify(problems_tag)} */}
       </div>
+      {
+        currentProblem ? <ScrapeProblem contestId={currentProblem.contestId} index={currentProblem.index} /> : null
+      }
+      {
+        JSON.stringify(currentProblem)
+      }
     </main>
   );
 }

@@ -1,4 +1,6 @@
 import aiohttp
+import requests
+from bs4 import BeautifulSoup
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware import cors
@@ -203,3 +205,17 @@ async def get_questions_by_tag(handle: str, tag: str):
                         return data_with_verdict
         except Exception as e:
             return {"Error": "Please try again later" + str(e)}
+
+
+@app.get("/get_problem_statement/{contestId}/{index}")
+async def get_problem_statement(contestId: str, index: str):
+    try:
+        url = "https://codeforces.com/contest/" + contestId + "/problem/" + index
+        print(url)
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        scraped_data = format(soup.find("div", class_="problem-statement").prettify())
+        return {"problem_statement": str(scraped_data)}
+        # return str(scraped_data)
+    except Exception as e:
+        return {"Error": "Please try again later" + str(e)}
