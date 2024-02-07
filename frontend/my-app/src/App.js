@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
@@ -15,6 +15,7 @@ function App() {
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
   const [currentProblem, setCurrentProblem] = useState(null);
+
   return (
     <main>
       <h1>CF Problem Generator</h1>
@@ -257,12 +258,9 @@ function App() {
         )}
         {/* {JSON.stringify(problems_tag)} */}
       </div>
-      {
-        currentProblem ? <ScrapeProblem contestId={currentProblem.contestId} index={currentProblem.index} /> : null
-      }
-      {
-        JSON.stringify(currentProblem)
-      }
+      
+      {currentProblem ? <ScrapeProblem contestId={currentProblem.contestId} index={currentProblem.index} /> : null}
+      
     </main>
   );
 }
