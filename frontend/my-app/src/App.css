@@ -110,7 +110,7 @@ main{
 }
 
 .solved{
-    background-color: green;
+    background-color: rgb(24, 176, 24);
     color: #000;
     text-decoration: none;
 }
@@ -121,13 +121,13 @@ main{
 }
 
 .unsolved{
-    background-color: red;
+    background-color: rgb(204, 204, 204);
     color: #000;
     text-decoration: none;
 }
 
 .unsolved:hover{
-    background-color: darkred;
+    background-color: rgb(125, 124, 125);
     color: #fff;
 }
 

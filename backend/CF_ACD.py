@@ -219,7 +219,7 @@ async def get_problem_statement(contestId: str, index: str):
             element = soup.find("div", class_=class_name)
             return format(element.prettify()) if element else None
 
-        scraped_problem_statement_complete = find_and_prettify("problem-statement")
+        # scraped_problem_statement_complete = find_and_prettify("problem-statement")
         scraped_problem_title = find_and_prettify("title")
         scraped_problem_time_limit = find_and_prettify("time-limit")
         scraped_problem_memory_limit = find_and_prettify("memory-limit")
@@ -229,8 +229,13 @@ async def get_problem_statement(contestId: str, index: str):
         scraped_output_specification = find_and_prettify("output-specification")
         scraped_sample_tests = find_and_prettify("sample-tests")
         scraped_note = find_and_prettify("note")
+        problem_statement_elements = soup.find("div", class_="problem-statement")
+        scraped_problem_statement = problem_statement_elements.findChildren(
+            "div", recursive=False
+        )[1]
+        # print(scraped_problem_statement)
         problem_data = {
-            "problem_statement": scraped_problem_statement_complete,
+            "problem_statement": str(scraped_problem_statement),
             "problem_title": scraped_problem_title,
             "problem_time_limit": scraped_problem_time_limit,
             "problem_memory_limit": scraped_problem_memory_limit,
