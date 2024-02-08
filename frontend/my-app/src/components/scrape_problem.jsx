@@ -6,8 +6,13 @@ const ScrapeProblem = ({contestId,index}) => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
         .then((data) => {
-            //console.log(data);
-            setProblem_Statement(DOMPurify.sanitize(data.problem_statement));
+            const formattedContent = data.problem_statement.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
+                return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
+            });
+            setProblem_Statement(DOMPurify.sanitize(formattedContent));
+            if (window.MathJax) {
+                window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub]);
+            }
         });
     }, [contestId,index]);
     return (
