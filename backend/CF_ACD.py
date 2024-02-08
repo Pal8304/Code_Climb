@@ -214,40 +214,35 @@ async def get_problem_statement(contestId: str, index: str):
         print(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
-        scraped_problem_statement_complete = format(
-            soup.find("div", class_="problem-statement").prettify()
-        )
-        scraped_problem_title = format(soup.find("div", class_="title").prettify())
-        scraped_problem_time_limit = format(
-            soup.find("div", class_="time-limit").prettify()
-        )
-        scraped_problem_memory_limit = format(
-            soup.find("div", class_="memory-limit").prettify()
-        )
-        scraped_input_file = format(soup.find("div", class_="input-file").prettify())
-        scraped_output_file = format(soup.find("div", class_="output-file").prettify())
-        scraped_input_specification = format(
-            soup.find("div", class_="input-specification").prettify()
-        )
-        scraped_output_specification = format(
-            soup.find("div", class_="output-specification").prettify()
-        )
-        scraped_sample_tests = format(
-            soup.find("div", class_="sample-tests").prettify()
-        )
-        scraped_note = format(soup.find("div", class_="note").prettify())
-        return {
-            "problem_statement": str(scraped_problem_statement_complete),
-            "problem_title": str(scraped_problem_title),
-            "problem_time_limit": str(scraped_problem_time_limit),
-            "problem_memory_limit": str(scraped_problem_memory_limit),
-            "problem_input_file": str(scraped_input_file),
-            "problem_output_file": str(scraped_output_file),
-            "problem_input_specification": str(scraped_input_specification),
-            "problem_output_specification": str(scraped_output_specification),
-            "problem_sample_tests": str(scraped_sample_tests),
-            "problem_note": str(scraped_note),
+
+        def find_and_prettify(class_name):
+            element = soup.find("div", class_=class_name)
+            return format(element.prettify()) if element else None
+
+        scraped_problem_statement_complete = find_and_prettify("problem-statement")
+        scraped_problem_title = find_and_prettify("title")
+        scraped_problem_time_limit = find_and_prettify("time-limit")
+        scraped_problem_memory_limit = find_and_prettify("memory-limit")
+        scraped_input_file = find_and_prettify("input-file")
+        scraped_output_file = find_and_prettify("output-file")
+        scraped_input_specification = find_and_prettify("input-specification")
+        scraped_output_specification = find_and_prettify("output-specification")
+        scraped_sample_tests = find_and_prettify("sample-tests")
+        scraped_note = find_and_prettify("note")
+        problem_data = {
+            "problem_statement": scraped_problem_statement_complete,
+            "problem_title": scraped_problem_title,
+            "problem_time_limit": scraped_problem_time_limit,
+            "problem_memory_limit": scraped_problem_memory_limit,
+            "input_file": scraped_input_file,
+            "output_file": scraped_output_file,
+            "input_specification": scraped_input_specification,
+            "output_specification": scraped_output_specification,
+            "sample_tests": scraped_sample_tests,
+            "note": scraped_note,
         }
+        filtered_problem_data = {k: v for k, v in problem_data.items() if v}
+        return filtered_problem_data
         # return str(scraped_data)
     except Exception as e:
         return {"Error": "Please try again later" + str(e)}

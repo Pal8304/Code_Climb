@@ -6,6 +6,7 @@ const ScrapeProblem = ({contestId,index}) => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
         .then((data) => {
+            // console.log(data);
             const formattedContent = data.problem_statement.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
                 return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
             });
