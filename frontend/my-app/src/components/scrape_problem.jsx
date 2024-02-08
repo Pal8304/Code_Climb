@@ -10,11 +10,16 @@ const ScrapeProblem = ({contestId,index}) => {
                 return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
             });
             setProblem_Statement(DOMPurify.sanitize(formattedContent));
-            if (window.MathJax) {
-                window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub]);
-            }
         });
     }, [contestId,index]);
+
+    useEffect(() => {
+        // Trigger MathJax typesetting after updating the problem statement
+        if (window.MathJax) {
+            window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub]);
+        }
+    }, [problem_statement]);
+
     return (
         <div>
             <h1>Problem Statement</h1>
