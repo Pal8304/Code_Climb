@@ -62,121 +62,172 @@ function App() {
         <div className="tag_input">
           <Dropdown className="custom-dropdown">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Select Tag
+              {tag ? tag : "Select Tag"} {/* Show the selected tag if it exists, otherwise show "Select Tag" */}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("dp");
                 }}
-              >
-                DP
-              </Dropdown.Item>
+                >
+                  DP
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
-                  setTag("math");
+                onClick={() => {
+                  setTag("greedy");
                 }}
-              >
-                Math
-              </Dropdown.Item>
+                >
+                  Greedy
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("implementation");
-                }}
+                }
+                }
               >
                 Implementation
               </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
-                  setTag("greedy");
+                onClick={() => {
+                  setTag("math");
                 }}
-              >
-                Greedy
-              </Dropdown.Item>
+                >
+                  Math
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("brute force");
                 }}
-              >
-                Brute Force
-              </Dropdown.Item>
+                >
+                  Brute Force
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("constructive algorithms");
                 }}
-              >
-                Constructive Algorithms
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={(e) => {
+                >
+                  Constructive Algorithms
+                </Dropdown.Item>
+              <Dropdown.Item  
+                onClick={() => {
                   setTag("dfs and similar");
                 }}
-              >
-                DFS and Similar
-              </Dropdown.Item>
+                >
+                  DFS and Similar
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
-                  setTag("sortings");
+                onClick={() => {
+                  setTag("binary search");
                 }}
+                >
+                  Binary Search
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("sortings");
+                } 
+                }
               >
                 Sortings
               </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
-                  setTag("binary search");
+                onClick={() => {
+                  setTag("data structures");
                 }}
-              >
-                Binary Search
-              </Dropdown.Item>
+                >
+                  Data Structures
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("graphs");
                 }}
-              >
-                Graphs
-              </Dropdown.Item>
+                >
+                  Graphs
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
+                  setTag("trees");
+                }}
+                >
+                  Trees
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
                   setTag("strings");
                 }}
-              >
-                Strings
-              </Dropdown.Item>
+                >
+                  Strings
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("number theory");
                 }}
-              >
-                Number Theory
-              </Dropdown.Item>
+                >
+                  Number Theory
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
-                  setTag("combinatorics");
-                }}
-              >
-                Combinatorics
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={(e) => {
-                  setTag("two pointers");
-                }}
-              >
-                Two Pointers
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
                   setTag("geometry");
                 }}
-              >
-                Geometry
-              </Dropdown.Item>
+                >
+                  Geometry
+                </Dropdown.Item>
               <Dropdown.Item
-                onClick={(e) => {
+                onClick={() => {
+                  setTag("combinatorics");
+                }}
+                >
+                  Combinatorics
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("two pointers");
+                }}
+                >
+                  Two Pointers
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("dsu");
+                }}
+                >
+                  DSU
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
                   setTag("bitmasks");
                 }}
-              >
-                Bitmasks
-              </Dropdown.Item>
+                >
+                  Bitmasks
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("probabilities");
+                }}
+                >
+                  Probabilities
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("shortest paths");
+                }}
+                >
+                  Shortest Paths
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("hashing");
+                }}
+                >
+                  Hashing
+                </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setTag("divide and conquer");
+                }}
+                >
+                  Divide and Conquer
+                </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           <Button variant="primary" type="submit" className="custom-button">
