@@ -126,6 +126,11 @@ main{
     text-decoration: none;
 }
 
+.unsolved:hover{
+    background-color: darkred;
+    color: #fff;
+}
+
 ul {
     width: 100%;
 }
@@ -141,12 +146,12 @@ ul li {
     overflow-x: scroll;
 }
 
-ul a {
+ul p {
     text-decoration: none;
     color: inherit;
 }
 
-.unsolved:hover{
-    background-color: darkred;
-    color: #fff;
+ul p:hover {
+    text-decoration: none;
+    cursor: pointer;
 }

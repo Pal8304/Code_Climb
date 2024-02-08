@@ -198,14 +198,12 @@ function App() {
             <h2>Problems By Rating</h2>
             <ul>
               {problems_rating.map((problem) => (
-                <a
+                <p
                   onClick={
                     () => {
                       setCurrentProblem({contestId: problem.contestId, index: problem.index});
                     }
                   }
-                  href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
-                  target="_blank"
                 >
                   <li
                     className={problem.solved ? "solved" : "unsolved"}
@@ -213,7 +211,7 @@ function App() {
                   >
                     {problem.name} ({problem.rating})
                   </li>
-                </a>
+                </p>
               ))}
             </ul>
           </div>
@@ -233,14 +231,12 @@ function App() {
             <div className="problems_tag_list">
               <ul>
                 {problems_tag.map((problem) => (
-                  <a
+                  <p
                     onClick={
                       () => {
                         setCurrentProblem({contestId: problem.contestId, index: problem.index});
                       }
                     }
-                    href={`https://codeforces.com/contest/${problem.contestId}/problem/${problem.index}`}
-                    target="_blank"
                   >
                     <li
                       className={problem.solved ? "solved" : "unsolved"}
@@ -248,7 +244,7 @@ function App() {
                     >
                       {problem.name} ({problem.rating})
                     </li>
-                  </a>
+                  </p>
                 ))}
               </ul>
             </div>
