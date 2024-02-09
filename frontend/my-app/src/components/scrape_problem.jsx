@@ -1,6 +1,9 @@
 import React,{useState,useEffect} from "react";
 import DOMPurify from 'dompurify'
-const ScrapeProblem = ({contestId,index}) => {
+import { useParams } from "react-router-dom";
+
+const ScrapeProblem = () => {
+    const {contestId,index} = useParams();
     const [problem_statement, setProblem_Statement] = useState("");
     const [problem_tite, setProblem_Title] = useState("");
     const [problem_time_limit, setProblem_Time_Limit] = useState("");
@@ -10,6 +13,7 @@ const ScrapeProblem = ({contestId,index}) => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
         .then((data) => {
+            console.log(data);
             const formattedProblemStatement = data.problem_statement.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
                 return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
             });
