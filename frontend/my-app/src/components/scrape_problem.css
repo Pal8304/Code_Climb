@@ -1,0 +1,38 @@
+.problem_details_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+}
+
+.problem_details_container .title{
+    justify-content: center;
+    align-items: center;
+}
+
+.problem_details_container .time-limit{
+    display: flex;
+    flex-direction: row;
+    gap : 10px;
+    align-items: center;
+}
+
+.problem_details_container .memory-limit{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.problem_details_container ul li{
+    /* 
+    This needs to be fixed for some problems that have a lot of MathJax
+     */
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

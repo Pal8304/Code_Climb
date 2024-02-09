@@ -247,8 +247,7 @@ async def get_problem_statement(contestId: str, index: str):
             "problem_note": scraped_note,
         }
         filtered_problem_data = {k: v for k, v in problem_data.items() if v}
-        print(filtered_problem_data)
+        # print(filtered_problem_data)
         return filtered_problem_data
-        # return str(scraped_data)
     except Exception as e:
         return {"Error": "Please try again later" + str(e)}

@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import tags from "./tags.json";
+
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [problems_rating, setProblems_Rating] = useState(null);
@@ -12,7 +14,7 @@ const Dashboard = () => {
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
   const [currentProblem, setCurrentProblem] = useState(null);
-
+  
   return (
     <main>
       <h1>CF Problem Generator</h1>
@@ -63,167 +65,17 @@ const Dashboard = () => {
               {/* Show the selected tag if it exists, otherwise show "Select Tag" */}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("dp");
-                }}
-              >
-                DP
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("greedy");
-                }}
-              >
-                Greedy
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("implementation");
-                }}
-              >
-                Implementation
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("math");
-                }}
-              >
-                Math
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("brute force");
-                }}
-              >
-                Brute Force
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("constructive algorithms");
-                }}
-              >
-                Constructive Algorithms
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("dfs and similar");
-                }}
-              >
-                DFS and Similar
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("binary search");
-                }}
-              >
-                Binary Search
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("sortings");
-                }}
-              >
-                Sortings
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("data structures");
-                }}
-              >
-                Data Structures
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("graphs");
-                }}
-              >
-                Graphs
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("trees");
-                }}
-              >
-                Trees
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("strings");
-                }}
-              >
-                Strings
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("number theory");
-                }}
-              >
-                Number Theory
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("geometry");
-                }}
-              >
-                Geometry
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("combinatorics");
-                }}
-              >
-                Combinatorics
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("two pointers");
-                }}
-              >
-                Two Pointers
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("dsu");
-                }}
-              >
-                DSU
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("bitmasks");
-                }}
-              >
-                Bitmasks
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("probabilities");
-                }}
-              >
-                Probabilities
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("shortest paths");
-                }}
-              >
-                Shortest Paths
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("hashing");
-                }}
-              >
-                Hashing
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setTag("divide and conquer");
-                }}
-              >
-                Divide and Conquer
-              </Dropdown.Item>
+              {
+                tags.map((tag) => (
+                  <Dropdown.Item
+                    onClick={() => {
+                      setTag(tag.tag_id);
+                    }}
+                  >
+                    {tag.tage_name}
+                  </Dropdown.Item>
+                ))
+              }
             </Dropdown.Menu>
           </Dropdown>
           <Button variant="primary" type="submit" className="custom-button">
@@ -307,7 +159,7 @@ const Dashboard = () => {
         ) : (
           <div className="problems_tag"></div>
         )}
-        {/* {JSON.stringify(problems_tag)} */}
+        {/* {JSON.stringify(tags)} */}
       </div>
     </main>
   );
