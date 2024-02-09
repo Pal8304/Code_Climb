@@ -239,12 +239,12 @@ async def get_problem_statement(contestId: str, index: str):
             "problem_title": scraped_problem_title,
             "problem_time_limit": scraped_problem_time_limit,
             "problem_memory_limit": scraped_problem_memory_limit,
-            "input_file": scraped_input_file,
-            "output_file": scraped_output_file,
-            "input_specification": scraped_input_specification,
-            "output_specification": scraped_output_specification,
-            "sample_tests": scraped_sample_tests,
-            "note": scraped_note,
+            "problem_input_file": scraped_input_file,
+            "problem_output_file": scraped_output_file,
+            "problem_input_specification": scraped_input_specification,
+            "problem_output_specification": scraped_output_specification,
+            "problem_sample_tests": scraped_sample_tests,
+            "problem_note": scraped_note,
         }
         filtered_problem_data = {k: v for k, v in problem_data.items() if v}
         return filtered_problem_data
