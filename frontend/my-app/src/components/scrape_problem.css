@@ -39,7 +39,7 @@
     display: flex;
     width: 100%;
     height: fit-content;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     overflow-x: hidden;
 }
 
@@ -75,6 +75,16 @@
 .sample-test{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 50px;
     align-items: left;
+    .input{
+        padding-left: 15px;
+        width: 50%;
+        border: 1px solid #fff;
+    }
+    .output{
+        padding-left: 15px;
+        width: 50%;
+        border: 1px solid #fff;
+    }
 }

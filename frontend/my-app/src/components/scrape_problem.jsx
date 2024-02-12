@@ -12,6 +12,7 @@ const ScrapeProblem = () => {
     const [input_specification, setInput_Specification] = useState("");
     const [output_specification, setOutput_Specification] = useState("");
     const [sample_tests, setSample_Tests] = useState("");
+    const [problem_note, setProblem_Note] = useState("");
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
@@ -57,6 +58,13 @@ const ScrapeProblem = () => {
                 );
                 setSample_Tests(DOMPurify.sanitize(formattedSampleTests));
             }
+            if(data.problem_note !== null && data.problem_note !== undefined && data.problem_note !== ""){
+                const formattedProblemNote = data.problem_note.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
+                    return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
+                }
+                );
+                setProblem_Note(DOMPurify.sanitize(formattedProblemNote));
+            }
         });
     }, [contestId,index]);
 
@@ -76,6 +84,8 @@ const ScrapeProblem = () => {
             <div className = "problem_input_specification"dangerouslySetInnerHTML={{ __html: input_specification }} ></div>
             <div className="problem_output_specification" dangerouslySetInnerHTML={{ __html: output_specification }} ></div>
             <div className = "problem_sample_test" dangerouslySetInnerHTML={{ __html: sample_tests }} ></div>
+            {/* Add condition to not add problem_note if it is null */}
+            <div className = "problem_note" dangerouslySetInnerHTML={{ __html: problem_note }} ></div>
         </div>
     );
     // console.log(problem_statement);
