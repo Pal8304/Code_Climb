@@ -21,11 +21,7 @@
     },
     {
         "tage_name" : "Binary Search",
-        "tag_id" : "binary-search"
-    },
-    {
-        "tage_name" : "Graph",
-        "tag_id" : "graph"
+        "tag_id" : "binary search"
     },
     {
         "tage_name" : "Tree",

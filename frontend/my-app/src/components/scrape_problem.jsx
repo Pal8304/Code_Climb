@@ -9,12 +9,14 @@ const ScrapeProblem = () => {
     const [problem_tite, setProblem_Title] = useState("");
     const [problem_time_limit, setProblem_Time_Limit] = useState("");
     const [problem_memory_limit, setProblem_Memory_Limit] = useState("");
-    
+    const [input_specification, setInput_Specification] = useState("");
+    const [output_specification, setOutput_Specification] = useState("");
+    const [sample_tests, setSample_Tests] = useState("");
     useEffect(() => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             const formattedProblemStatement = data.problem_statement.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
                 return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
             });
@@ -34,6 +36,27 @@ const ScrapeProblem = () => {
             }
             );
             setProblem_Memory_Limit(DOMPurify.sanitize(formattedProblemMemoryLimit));
+            if(data.problem_input_specification !== null && data.problem_input_specification !== undefined && data.problem_input_specification !== ""){
+                const formattedInputSpecification = data.problem_input_specification.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
+                    return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
+                }
+                );
+                setInput_Specification(DOMPurify.sanitize(formattedInputSpecification));
+            }
+            if(data.problem_output_specification !== null && data.problem_output_specification !== undefined && data.problem_output_specification !== ""){
+                const formattedOutputSpecification = data.problem_output_specification.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
+                    return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
+                }
+                );
+                setOutput_Specification(DOMPurify.sanitize(formattedOutputSpecification));
+            }
+            if(data.problem_sample_tests !== null && data.problem_sample_tests !== undefined && data.problem_sample_tests !== ""){
+                const formattedSampleTests = data.problem_sample_tests.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
+                    return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
+                }
+                );
+                setSample_Tests(DOMPurify.sanitize(formattedSampleTests));
+            }
         });
     }, [contestId,index]);
 
@@ -46,10 +69,13 @@ const ScrapeProblem = () => {
 
     return (
         <div className="problem_details_container">
-            <h2 dangerouslySetInnerHTML={{ __html: problem_tite }} ></h2>
-            <p dangerouslySetInnerHTML={{ __html: problem_time_limit }} ></p>
-            <p dangerouslySetInnerHTML={{ __html: problem_memory_limit }} ></p>
-            <div dangerouslySetInnerHTML={{ __html: problem_statement }} ></div>
+            <h2  className = "problem_tite" dangerouslySetInnerHTML={{ __html: problem_tite }} ></h2>
+            <p className = "problem_time_limit" dangerouslySetInnerHTML={{ __html: problem_time_limit }} ></p>
+            <p className = "problem_memory_limit" dangerouslySetInnerHTML={{ __html: problem_memory_limit }} ></p>
+            <div className="problem_statement" dangerouslySetInnerHTML={{ __html: problem_statement }} ></div>
+            <div className = "problem_input_specification"dangerouslySetInnerHTML={{ __html: input_specification }} ></div>
+            <div className="problem_output_specification" dangerouslySetInnerHTML={{ __html: output_specification }} ></div>
+            <div className = "problem_sample_test" dangerouslySetInnerHTML={{ __html: sample_tests }} ></div>
         </div>
     );
     // console.log(problem_statement);
