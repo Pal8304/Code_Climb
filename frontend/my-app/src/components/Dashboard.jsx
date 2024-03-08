@@ -17,8 +17,10 @@ const Dashboard = () => {
   
   return (
     <main>
-      <h1>CF Problem Generator</h1>
-      <p>This is a tool to generate problems for the CF Problem Generator.</p>
+      <h1>Code Climb</h1>
+      <p>
+        Enter your Codeforces username and we will generate problems for you
+      </p>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
