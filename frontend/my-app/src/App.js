@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ScrapeProblem from "./components/scrape_problem";
-import Dashboard from "./components/Dashboard";
+import ScrapeProblem from "./components/scrape-problem";
+import Dashboard from "./components/dashboard";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React from "react";
 

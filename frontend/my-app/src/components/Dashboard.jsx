@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import tags from "./tags.json";
+import ProblemRating from "./problem-rating";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -42,9 +42,9 @@ const Dashboard = () => {
             placeholder="Enter your CF username"
             className="custom-input"
           />
-          <Button variant="primary" type="submit" className="custom-button">
+          <button type="submit" className="generate-questions-btn">
             Generate Questions as per rating
-          </Button>
+          </button>
         </div>
       </form>
 
@@ -80,9 +80,9 @@ const Dashboard = () => {
               }
             </Dropdown.Menu>
           </Dropdown>
-          <Button variant="primary" type="submit" className="custom-button">
+          <button type="submit" className="generate-questions-btn">
             Generate Questions as per tag
-          </Button>
+          </button>
         </div>
       </form>
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
         <div></div>
       )}
       <div className="problems">
-        {loading == 2 ? (
+        {loading === 2 ? (
           <div className="problems_rating">
             <h2>Problems By Rating</h2>
             <ul>
@@ -124,13 +124,13 @@ const Dashboard = () => {
           <div className="problems"></div>
         )}
 
-        {loading_tag == 4 ? (
+        {loading_tag === 4 ? (
           <div>
             <Spinner animation="border" role="status">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           </div>
-        ) : loading_tag == 5 ? (
+        ) : loading_tag === 5 ? (
           <div className="problems_tag">
             <h2>Problems By Tag</h2>
             <div className="problems_tag_list">
@@ -163,6 +163,9 @@ const Dashboard = () => {
         )}
         {/* {JSON.stringify(tags)} */}
       </div>
+      {/* <div>
+        <ProblemRating rating={500} />
+      </div> */}
     </main>
   );
 };

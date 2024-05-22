@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import DOMPurify from 'dompurify'
 import { useParams } from "react-router-dom";
-import './scrape_problem.css';
+import './scrape-problem.css';
 
 const ScrapeProblem = () => {
     const {contestId,index} = useParams();
