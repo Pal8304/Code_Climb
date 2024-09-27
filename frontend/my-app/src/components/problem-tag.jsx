@@ -1,5 +1,4 @@
-import React from 'react';
-export default function ProblemRating({ loading, rating }) {
+export default function ProblemTag({loading, tags}){
     if(loading){
         return (
             <div>
@@ -7,16 +6,16 @@ export default function ProblemRating({ loading, rating }) {
             </div>
         );
     }
-    if(rating === null || rating === undefined || rating === ""){
+    if(tags === null || tags === undefined || tags === ""){
         return (
             <div>
-                Rating not available
+                Tags not available
             </div>
         );
     }
     return (
         <div>
-            <h1>Rating: {rating}</h1>
+            <h1>Tags: {tags}</h1>
         </div>
     );
 }

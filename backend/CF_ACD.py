@@ -21,6 +21,9 @@ async def get_rating(handle: str):
                         status_code=response.status, detail="CF API is down"
                     )
                 data = await response.json()
+                print(data)
+                if data["status"] == "FAILED":
+                    return "User not found"
                 return data["result"][0]["rating"]
         except Exception as e:
             return {"Error": "Please try again later" + str(e)}
@@ -82,11 +85,15 @@ async def get_questions(handle: str):
             async with session.get(
                 "https://codeforces.com/api/user.info?handles=" + handle
             ) as response:
+                print(response.status)
                 if response.status != 200:
                     return HTTPException(
                         status_code=response.status, detail="CF API is down"
                     )
                 data = await response.json()
+                print(data)
+                if data["status"] == "FAILED":
+                    return {"Error": "User not found"}
                 rating = data["result"][0]["rating"]
                 lowerlimit = (rating // 100) * 100 - 200
                 upperlimit = (rating // 100) * 100 + 200
@@ -143,6 +150,8 @@ async def get_questions_by_tag(handle: str, tag: str):
                         status_code=response.status, detail="CF API is down"
                     )
                 data = await response.json()
+                if data["status"] == "FAILED":
+                    return {"Error": "User not found"}
                 rating = data["result"][0]["rating"]
                 lowerlimit = (rating // 100) * 100 - 200
                 upperlimit = (rating // 100) * 100 + 200

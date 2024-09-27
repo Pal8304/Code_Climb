@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "ABC",
+        "rating" : 1200
+    },
+    {
+        "id": 2,
+        "name": "DEF",
+        "rating" : 1300
+    },
+    {
+        "id": 3,
+        "name": "GHI",
+        "rating" : 1400
+    }
+]

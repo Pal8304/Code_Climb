@@ -4,7 +4,11 @@ import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import tags from "./tags.json";
+
+import problemList from "./problemsList.json";
+
 import ProblemRating from "./problem-rating";
+import ProblemCarousel from "./problem-carousel";
 
 const Dashboard = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +18,7 @@ const Dashboard = () => {
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
   const [currentProblem, setCurrentProblem] = useState(null);
-  
+  console.log(problems_rating);
   return (
     <main>
       <h1>Code Climb</h1>
@@ -94,11 +98,11 @@ const Dashboard = () => {
         <div></div>
       )}
       <div className="problems">
-        {loading === 2 ? (
+        {loading === 2 ? problems_rating && (
           <div className="problems_rating">
             <h2>Problems By Rating</h2>
             <ul>
-              {problems_rating.map((problem) => (
+              {problems_rating && problems_rating.map((problem) => (
                 <Link to={`/scrape-problem/${problem.contestId}/${problem.index}`}
                 onClick={
                   () => {
@@ -163,9 +167,10 @@ const Dashboard = () => {
         )}
         {/* {JSON.stringify(tags)} */}
       </div>
-      {/* <div>
-        <ProblemRating rating={500} />
-      </div> */}
+      <div>
+        {/* <ProblemRating loading={loading} rating={problems_rating} /> */}
+        { problemList && <ProblemCarousel problems={problemList} />}
+      </div>
     </main>
   );
 };

@@ -1,0 +1,11 @@
+.problem-carousel-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
