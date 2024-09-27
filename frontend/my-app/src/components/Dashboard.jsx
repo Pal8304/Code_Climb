@@ -167,10 +167,9 @@ const Dashboard = () => {
         )}
         {/* {JSON.stringify(tags)} */}
       </div>
-      <div>
-        {/* <ProblemRating loading={loading} rating={problems_rating} /> */}
+      {/* <div>
         { problemList && <ProblemCarousel problems={problemList} />}
-      </div>
+      </div> */}
     </main>
   );
 };
