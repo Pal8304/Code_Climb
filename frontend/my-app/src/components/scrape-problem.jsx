@@ -17,7 +17,11 @@ const ScrapeProblem = () => {
         fetch(`http://127.0.0.1:8000/get_problem_statement/${contestId}/${index}`)
         .then((res) => res.json())
         .then((data) => {
-            // console.log(data);
+            console.log(data);
+            if(data["Error"]){
+                setProblem_Statement("There is some error : " + data["Error"]);
+                return;
+            }
             const formattedProblemStatement = data.problem_statement.replace(/\$\$\$(.*?)\$\$\$/g, (match, p1) => {
                 return `\\(${p1}\\)`; // Assuming inline math, adjust if needed
             });
@@ -66,7 +70,7 @@ const ScrapeProblem = () => {
                 setProblem_Note(DOMPurify.sanitize(formattedProblemNote));
             }
         });
-    }, [contestId,index]);
+    }, [contestId, index, problem_statement]);
 
     useEffect(() => {
         // Trigger MathJax typesetting after updating the problem statement
@@ -88,7 +92,6 @@ const ScrapeProblem = () => {
             <div className = "problem_note" dangerouslySetInnerHTML={{ __html: problem_note }} ></div>
         </div>
     );
-    // console.log(problem_statement);
 }
 
 export default ScrapeProblem;

@@ -110,7 +110,7 @@ const Dashboard = () => {
                       contestId: problem.contestId,
                       index: problem.index,
                     });
-                    //console.log(problem.contestId,problem.index);
+                    console.log(problem.contestId,problem.index);
                   }
                 }
                 >
