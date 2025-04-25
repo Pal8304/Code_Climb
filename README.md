@@ -21,3 +21,6 @@
     pip install -r requirements.txt
     uvicorn CF_ACD:app --reload
 ```
+
+### To do :
+- [] Handle Unrated and Above 3500 rated people 

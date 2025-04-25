@@ -5,11 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import tags from "./tags.json";
 
-import problemList from "./problemsList.json";
-
-import ProblemRating from "./problem-rating";
-import ProblemCarousel from "./problem-carousel";
-
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [problems_rating, setProblems_Rating] = useState(null);
@@ -17,7 +12,7 @@ const Dashboard = () => {
   const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
-  const [currentProblem, setCurrentProblem] = useState(null);
+  const [, setCurrentProblem] = useState(null);
   console.log(problems_rating);
   return (
     <main>
