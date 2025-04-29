@@ -1,34 +1,34 @@
 [
     {
-        "tage_name" : "DP",
+        "tag_name" : "DP",
         "tag_id" : "dp"
     },
     {
-        "tage_name" : "Greedy",
+        "tag_name" : "Greedy",
         "tag_id" : "greedy"
     },
     {
-        "tage_name" : "Implementation",
+        "tag_name" : "Implementation",
         "tag_id" : "implementation"
     },
     {
-        "tage_name" : "Math",
+        "tag_name" : "Math",
         "tag_id" : "math"
     },
     {
-        "tage_name" : "String",
+        "tag_name" : "String",
         "tag_id" : "string"
     },
     {
-        "tage_name" : "Binary Search",
+        "tag_name" : "Binary Search",
         "tag_id" : "binary search"
     },
     {
-        "tage_name" : "Tree",
+        "tag_name" : "Tree",
         "tag_id" : "tree"
     },
     {
-        "tage_name" : "Two Pointers",
+        "tag_name" : "Two Pointers",
         "tag_id" : "two pointers"
     }
 ]

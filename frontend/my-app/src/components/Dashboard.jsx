@@ -1,11 +1,10 @@
 import { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import Spinner from "react-bootstrap/Spinner";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 import tags from "./tags.json";
-import ProblemRating from "./problem-rating";
-
+import { InputLabel, MenuItem, TextField, FormControl } from "@mui/material";
+import Select from "@mui/material/Select";
+import LoadingQuestions from "./loading";
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [problems_rating, setProblems_Rating] = useState(null);
@@ -13,8 +12,8 @@ const Dashboard = () => {
   const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
-  const [currentProblem, setCurrentProblem] = useState(null);
-  
+  const [, setCurrentProblem] = useState(null);
+
   return (
     <main>
       <h1>Code Climb</h1>
@@ -34,17 +33,23 @@ const Dashboard = () => {
         }}
       >
         <div className="rating_input">
-          <input
-            type="text"
+          <TextField
+            id="outlined-basic"
+            label="Codeforces Username"
+            variant="outlined"
+            value={username}
+            sx={{
+              input: { color: "white" },
+              label: { color: "white" },
+              width: 300,
+            }}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
-            placeholder="Enter your CF username"
-            className="custom-input"
           />
-          <button type="submit" className="generate-questions-btn">
+          <Button variant="contained" type="submit">
             Generate Questions as per rating
-          </button>
+          </Button>
         </div>
       </form>
 
@@ -61,54 +66,52 @@ const Dashboard = () => {
         }}
       >
         <div className="tag_input">
-          <Dropdown className="custom-dropdown">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {tag ? tag : "Select Tag"}{" "}
-              {/* Show the selected tag if it exists, otherwise show "Select Tag" */}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {
-                tags.map((tag) => (
-                  <Dropdown.Item
-                    onClick={() => {
-                      setTag(tag.tag_id);
-                    }}
-                  >
-                    {tag.tage_name}
-                  </Dropdown.Item>
-                ))
-              }
-            </Dropdown.Menu>
-          </Dropdown>
-          <button type="submit" className="generate-questions-btn">
+          <FormControl sx={{ width: 300 }}>
+            <InputLabel id="tags-select-label">Tags</InputLabel>
+            <Select
+              labelId="tags-select-label"
+              id="tags-select-standard"
+              value={tag}
+              label="Tags"
+              sx={{
+                color: "white",
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+              onChange={(e) => {
+                setTag(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              {tags.map((tag) => (
+                <MenuItem value={tag.tag_id} key={tag.tag_id}>
+                  {tag.tag_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button variant="contained" type="submit">
             Generate Questions as per tag
-          </button>
+          </Button>
         </div>
       </form>
 
-      {loading === 1 ? (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      ) : (
-        <div></div>
-      )}
+      {loading === 1 ? <LoadingQuestions /> : <div></div>}
       <div className="problems">
         {loading === 2 ? (
           <div className="problems_rating">
             <h2>Problems By Rating</h2>
             <ul>
               {problems_rating.map((problem) => (
-                <Link to={`/scrape-problem/${problem.contestId}/${problem.index}`}
-                onClick={
-                  () => {
+                <Link
+                  to={`/scrape-problem/${problem.contestId}/${problem.index}`}
+                  onClick={() => {
                     setCurrentProblem({
                       contestId: problem.contestId,
                       index: problem.index,
                     });
-                    //console.log(problem.contestId,problem.index);
-                  }
-                }
+                  }}
                 >
                   <li
                     className={problem.solved ? "solved" : "unsolved"}
@@ -126,9 +129,7 @@ const Dashboard = () => {
 
         {loading_tag === 4 ? (
           <div>
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
+            <LoadingQuestions />
           </div>
         ) : loading_tag === 5 ? (
           <div className="problems_tag">
@@ -136,16 +137,14 @@ const Dashboard = () => {
             <div className="problems_tag_list">
               <ul>
                 {problems_tag.map((problem) => (
-                  <Link to={`/scrape-problem/${problem.contestId}/${problem.index}`}
-                  onClick={
-                    () => {
+                  <Link
+                    to={`/scrape-problem/${problem.contestId}/${problem.index}`}
+                    onClick={() => {
                       setCurrentProblem({
                         contestId: problem.contestId,
                         index: problem.index,
                       });
-                      //console.log(problem.contestId,problem.index);
-                    }
-                  }
+                    }}
                   >
                     <li
                       className={problem.solved ? "solved" : "unsolved"}
@@ -161,11 +160,7 @@ const Dashboard = () => {
         ) : (
           <div className="problems_tag"></div>
         )}
-        {/* {JSON.stringify(tags)} */}
       </div>
-      {/* <div>
-        <ProblemRating rating={500} />
-      </div> */}
     </main>
   );
 };
