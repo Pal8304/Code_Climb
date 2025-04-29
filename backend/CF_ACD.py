@@ -211,7 +211,7 @@ async def get_questions_by_tag(handle: str, tag: str):
 async def get_problem_statement(contestId: str, index: str):
     try:
         url = "https://codeforces.com/contest/" + contestId + "/problem/" + index
-        print(url)
+        # print(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
 
@@ -233,7 +233,7 @@ async def get_problem_statement(contestId: str, index: str):
         scraped_problem_statement = problem_statement_elements.findChildren(
             "div", recursive=False
         )[1]
-        # print(scraped_problem_statement)
+        print(scraped_problem_statement)
         problem_data = {
             "problem_statement": str(scraped_problem_statement),
             "problem_title": scraped_problem_title,
@@ -247,7 +247,8 @@ async def get_problem_statement(contestId: str, index: str):
             "problem_note": scraped_note,
         }
         filtered_problem_data = {k: v for k, v in problem_data.items() if v}
-        # print(filtered_problem_data)
+        print(filtered_problem_data)
         return filtered_problem_data
     except Exception as e:
+        print(e)
         return {"Error": "Please try again later" + str(e)}

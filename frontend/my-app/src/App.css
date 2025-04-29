@@ -1,148 +1,147 @@
-main{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    gap: 20px;
-    background-color: rgb(30 41 59);
-    color: #fff;
-    height: 100vh;
-    overflow-y: scroll;
+main {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(30 41 59);
+  color: #fff;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .rating_input {
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    gap: 10px;
-
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 10px;
 }
 
-.rating_input button{
-    width: auto;
-    padding: 10px 20px;
-    height: 50%;
+.rating_input button {
+  width: auto;
+  padding: 10px 20px;
+  height: 50%;
 }
 
-.tag_input{
-    display: flex;
-    gap: 10px;
+.tag_input {
+  display: flex;
+  gap: 10px;
 }
 
-.problems{
-    display: flex;
-    gap: 100px;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: #fff;
-    /* align-items: center; */
+.problems {
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #fff;
+  /* align-items: center; */
 }
 
-.problems_rating{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+.problems_rating {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
-.problems_rating h2{
-    justify-content: center;
-    align-items: center;
+.problems_rating h2 {
+  justify-content: center;
+  align-items: center;
 }
 
-.problems_rating ul{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+.problems_rating ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
-.problems_rating li{
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.problems_rating li {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.problems_tag{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+.problems_tag {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
-.problems_tag_list{
-    max-height: 50vh;
-    overflow-y: scroll;
+.problems_tag_list {
+  max-height: 50vh;
+  overflow-y: scroll;
 }
 
-.problems_tag_list ul{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+.problems_tag_list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
-.problems_tag_list li{
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.problems_tag_list li {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.solved{
-    background-color: rgb(24, 176, 24);
-    color: #000;
-    text-decoration: none;
+.solved {
+  background-color: rgb(24, 176, 24);
+  color: #000;
+  text-decoration: none;
 }
 
-.solved:hover{
-    background-color: darkgreen;
-    color: #fff;
+.solved:hover {
+  background-color: darkgreen;
+  color: #fff;
 }
 
-.unsolved{
-    background-color: rgb(204, 204, 204);
-    color: #000;
-    text-decoration: none;
+.unsolved {
+  background-color: rgb(204, 204, 204);
+  color: #000;
+  text-decoration: none;
 }
 
-.unsolved:hover{
-    background-color: rgb(125, 124, 125);
-    color: #fff;
+.unsolved:hover {
+  background-color: rgb(125, 124, 125);
+  color: #fff;
 }
 
-.generate-questions-btn{
-    padding: 10px 20px;
-    background-color: inherit;
-    color: #fff;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    cursor: pointer;
+.generate-questions-btn {
+  padding: 10px 20px;
+  background-color: inherit;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.generate-questions-btn:hover{
-    background-color: rgb(71 85 105);
+.generate-questions-btn:hover {
+  background-color: rgb(71 85 105);
 }
 
 ul {
-    width: 100%;
+  width: 100%;
 }
 
 ul li {
-    display: flex;
-    list-style-type: none;
-    width: 20rem;
-    height: 3rem;
-    padding: 10px;
-    border-radius: 40px;
-    margin-top: 10px;
-    overflow-x: scroll;
+  display: flex;
+  list-style-type: none;
+  width: 20rem;
+  height: 3rem;
+  padding: 10px;
+  border-radius: 40px;
+  margin-top: 10px;
+  overflow-x: scroll;
 }
 
 ul :link {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }

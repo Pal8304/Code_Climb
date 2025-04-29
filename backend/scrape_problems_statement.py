@@ -15,9 +15,11 @@ def scrape_problem_statement(problem_url):
         #     for idx, item in enumerate(soup.find_all("div", class_="problem-statement"))
         # ]
         scraped_data = soup.find_all("div", class_="problem-statement")
+        # print(scraped_data)
         return scraped_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error scraping content: {str(e)}")
 
 
-print(scrape_problem_statement(test_url))
+if __name__ == "__main__":
+    print(scrape_problem_statement(test_url))

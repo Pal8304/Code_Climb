@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import tags from "./tags.json";
 import { InputLabel, MenuItem, TextField, FormControl } from "@mui/material";
 import Select from "@mui/material/Select";
 import LoadingQuestions from "./loading";
+import ProblemsRatingList from "./problem-rating-list";
+import ProblemsTagsList from "./problems-tags-list";
 const Dashboard = () => {
   const [username, setUsername] = useState("");
   const [problems_rating, setProblems_Rating] = useState(null);
@@ -12,8 +13,7 @@ const Dashboard = () => {
   const [tag, setTag] = useState("");
   const [loading, setIsLoading] = useState(0); // 0 - not loading and no spinner in rating, 1 - loading and spinner in rating , 2 - fetched and no spinner in rating
   const [loading_tag, setIsLoading_tag] = useState(3); // 3 - not loading and no spinner in tag, 4 - loading and spinner in tag , 5 - fetched and no spinner in tag
-  const [, setCurrentProblem] = useState(null);
-
+  // const [, setCurrentProblem] = useState(null); // for future use when we want to show the problem details
   return (
     <main>
       <h1>Code Climb</h1>
@@ -100,29 +100,7 @@ const Dashboard = () => {
       {loading === 1 ? <LoadingQuestions /> : <div></div>}
       <div className="problems">
         {loading === 2 ? (
-          <div className="problems_rating">
-            <h2>Problems By Rating</h2>
-            <ul>
-              {problems_rating.map((problem) => (
-                <Link
-                  to={`/scrape-problem/${problem.contestId}/${problem.index}`}
-                  onClick={() => {
-                    setCurrentProblem({
-                      contestId: problem.contestId,
-                      index: problem.index,
-                    });
-                  }}
-                >
-                  <li
-                    className={problem.solved ? "solved" : "unsolved"}
-                    key={problem.contestId + problem.index}
-                  >
-                    {problem.name} ({problem.rating})
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
+          <ProblemsRatingList problems={problems_rating} />
         ) : (
           <div className="problems"></div>
         )}
@@ -132,31 +110,7 @@ const Dashboard = () => {
             <LoadingQuestions />
           </div>
         ) : loading_tag === 5 ? (
-          <div className="problems_tag">
-            <h2>Problems By Tag</h2>
-            <div className="problems_tag_list">
-              <ul>
-                {problems_tag.map((problem) => (
-                  <Link
-                    to={`/scrape-problem/${problem.contestId}/${problem.index}`}
-                    onClick={() => {
-                      setCurrentProblem({
-                        contestId: problem.contestId,
-                        index: problem.index,
-                      });
-                    }}
-                  >
-                    <li
-                      className={problem.solved ? "solved" : "unsolved"}
-                      key={problem.contestId + problem.index}
-                    >
-                      {problem.name} ({problem.rating})
-                    </li>
-                  </Link>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <ProblemsTagsList problems_tag={problems_tag} />
         ) : (
           <div className="problems_tag"></div>
         )}
